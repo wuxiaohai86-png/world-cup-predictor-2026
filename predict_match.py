@@ -54,15 +54,11 @@ def predict_match(
 ) -> Dict[str, Any]:
     """Run the full prediction pipeline and print results."""
 
-    # ── Guard against closed stdout (Streamlit Cloud) ──
-    _orig_stdout = sys.stdout
-    _stdout_replaced = False
-    try:
-        sys.stdout.write('')
-    except (ValueError, OSError):
-        import io
-        sys.stdout = io.StringIO()
-        _stdout_replaced = True
+    # ── Capture all output (Streamlit Cloud safe) ──
+    import io as _io
+    _real_stdout = sys.stdout
+    _capture = _io.StringIO()
+    sys.stdout = _capture
 
     # ── Load data ──
     df = load_match_data()
@@ -99,10 +95,6 @@ def predict_match(
         rf_probs, lr_probs, poisson_wdl)
 
     # ── Output ──
-    try:
-        sys.stdout.reconfigure(encoding='utf-8')
-    except (ValueError, OSError, AttributeError):
-        pass  # Streamlit Cloud may close/reassign stdout
     dbar = chr(0x2550)
     w = DISPLAY_WIDTH
 
@@ -236,8 +228,9 @@ def predict_match(
     print(dbar * w)
     print()
 
-    if _stdout_replaced:
-        sys.stdout = _orig_stdout
+    # Save captured terminal output, restore real stdout
+    _output_text = _capture.getvalue()
+    sys.stdout = _real_stdout
 
     return {
         'ensemble': ensemble,
@@ -248,6 +241,7 @@ def predict_match(
         'poisson_wdl': poisson_wdl,
         'rf_probs': rf_probs,
         'lr_probs': lr_probs,
+        '_output': _output_text,
     }
 
 
@@ -275,6 +269,13 @@ if __name__ == '__main__':
         show_all = '--all-scores' in sys.argv
         show_acc = '--accuracy' in sys.argv
 
-        predict_match(home_team, away_team, year,
-                      show_all_scores=show_all,
-                      show_accuracy=show_acc)
+        result = predict_match(home_team, away_team, year,
+                                show_all_scores=show_all,
+                                show_accuracy=show_acc)
+        # Replay captured terminal output
+        captured = result.get('_output', '')
+        if captured:
+            try:
+                sys.stdout.write(captured)
+            except (ValueError, OSError):
+                print(captured, file=sys.stderr)
