@@ -89,7 +89,10 @@ def predict_match(
         rf_probs, lr_probs, poisson_wdl)
 
     # ── Output ──
-    sys.stdout.reconfigure(encoding='utf-8')
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except (ValueError, OSError, AttributeError):
+        pass  # Streamlit Cloud may close/reassign stdout
     dbar = chr(0x2550)
     w = DISPLAY_WIDTH
 
