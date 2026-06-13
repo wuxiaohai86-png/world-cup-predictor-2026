@@ -54,6 +54,16 @@ def predict_match(
 ) -> Dict[str, Any]:
     """Run the full prediction pipeline and print results."""
 
+    # ── Guard against closed stdout (Streamlit Cloud) ──
+    _orig_stdout = sys.stdout
+    _stdout_replaced = False
+    try:
+        sys.stdout.write('')
+    except (ValueError, OSError):
+        import io
+        sys.stdout = io.StringIO()
+        _stdout_replaced = True
+
     # ── Load data ──
     df = load_match_data()
     rank_dict, points_dict = load_fifa_rankings()
@@ -225,6 +235,9 @@ def predict_match(
     print(f'  NOTE: Does not account for 2026 squad changes or current injuries.')
     print(dbar * w)
     print()
+
+    if _stdout_replaced:
+        sys.stdout = _orig_stdout
 
     return {
         'ensemble': ensemble,
