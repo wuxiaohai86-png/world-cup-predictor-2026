@@ -506,7 +506,7 @@ st.markdown("""
 # TABS
 # ═══════════════════════════════════════════════════════════════════════════
 
-tab1, tab2, tab3 = st.tabs(["🔮 单场预测", "📊 小组推演", "ℹ️ 模型说明"])
+tab1, tab2, tab3, tab4 = st.tabs(["🔮 单场预测", "📊 小组推演", "📋 真实战绩", "ℹ️ 模型说明"])
 
 # ── TAB 1: Single Match ──
 with tab1:
@@ -676,8 +676,75 @@ with tab2:
                     f"({w} 主{m['home_prob']*100:.0f}% 平{m['draw_prob']*100:.0f}% 客{m['away_prob']*100:.0f}%)"
                 )
 
-# ── TAB 3: About ──
+# ── TAB 3: Real Results ──
 with tab3:
+    st.markdown("##### 📋 真实比赛结果 vs 模型预测")
+    st.caption("持续更新中 · 揭幕战以来的每场比赛")
+
+    import json as _json
+    try:
+        with open('data/results_2026.json', 'r', encoding='utf-8') as f:
+            results_data = _json.load(f)
+    except (FileNotFoundError, _json.JSONDecodeError):
+        results_data = {'matches': [], 'summary': {}}
+
+    matches = results_data.get('matches', [])
+    summary = results_data.get('summary', {})
+
+    if matches:
+        # Accuracy card
+        acc = summary.get('model_accuracy', 'N/A')
+        total = summary.get('total_matches', len(matches))
+        correct = summary.get('model_correct_wdl', 0)
+        st.markdown(f"""
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem;">
+            <div class="bet-item" style="flex:1;min-width:100px;">
+                <div class="bet-value">{total}</div>
+                <div class="bet-label">已记录</div>
+            </div>
+            <div class="bet-item" style="flex:1;min-width:100px;">
+                <div class="bet-value">{correct}/{total}</div>
+                <div class="bet-label">胜平负准确</div>
+            </div>
+            <div class="bet-item" style="flex:1;min-width:100px;">
+                <div class="bet-value">{acc}</div>
+                <div class="bet-label">准确率</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        # Results table
+        for m in reversed(matches):
+            home_zh = to_zh(m['home_team'])
+            away_zh = to_zh(m['away_team'])
+            correct_icon = '✅' if m.get('model_correct') else '❌'
+            pred_w = m.get('predicted_winner', '?')
+            pred_w_label = {'home': f'{home_zh}胜', 'away': f'{away_zh}胜', 'draw': '平局'}.get(pred_w, pred_w)
+            exp_g = m.get('predicted_exp_goals', [0, 0])
+            bg = 'rgba(34,197,94,0.06)' if m.get('model_correct') else 'rgba(239,68,68,0.06)'
+            note = m.get('note', '')
+            st.markdown(f"""
+            <div style="padding:0.75rem 1rem;border-radius:12px;background:{bg};
+                        border:1px solid rgba(255,255,255,0.06);margin:0.4rem 0;">
+                <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem;">
+                    <span style="font-weight:600;">
+                        {correct_icon} <b>{home_zh} {m['home_score']}–{m['away_score']} {away_zh}</b>
+                    </span>
+                    <span style="font-size:0.8rem;color:var(--muted-foreground);">
+                        模型预测: {pred_w_label} (期望 {exp_g[0]:.1f}–{exp_g[1]:.1f})
+                    </span>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+            if note:
+                st.caption(f"💡 {note}")
+
+    else:
+        st.info("暂无比赛数据，等待开赛后更新。")
+        st.markdown("*数据文件位于 `data/results_2026.json`，每场比赛结束后手动录入。*")
+
+# ── TAB 4: About ──
+with tab4:
     st.markdown("""
     <div class="glass-card" style="line-height:1.8;">
     <h3>⚙️ 技术架构</h3>
