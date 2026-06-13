@@ -51,12 +51,25 @@
       "predicted_4_1_probability": 0.0041,
       "model_correct": true,
       "note": "美国大胜，但模型预测期望进球仅0.92-0.65，4-1概率仅0.41%。东道主揭幕战爆发力远超历史数据所能捕捉。"
+    },
+    {
+      "date": "2026-06-14",
+      "group": "B",
+      "home_team": "Qatar",
+      "away_team": "Switzerland",
+      "home_score": 1,
+      "away_score": 1,
+      "winner": "draw",
+      "predicted_winner": "away",
+      "predicted_exp_goals": [0.57, 1.48],
+      "model_correct": false,
+      "note": "卡塔尔1-1逼平瑞士！模型预测瑞士胜(65.1%)期望1.48球。1-1是Poisson第4可能比分(10.9%)。卡塔尔主场气势加防守反击拿到宝贵1分。"
     }
   ],
   "summary": {
-    "total_matches": 4,
+    "total_matches": 5,
     "model_correct_wdl": 3,
-    "model_accuracy": "75.0%",
+    "model_accuracy": "60.0%",
     "avg_expected_goal_error": 0.89
   }
 }
