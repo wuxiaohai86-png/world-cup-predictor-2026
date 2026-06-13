@@ -39,12 +39,17 @@ try:
     from group_projection import predict_group, load_tournament
     from models import score_probability_matrix, calculate_poisson_lambdas
     from data import load_match_data, calculate_team_stats
+    from zh_names import to_zh, TEAM_ZH
     IMPORT_OK = True
 except Exception as e:
     IMPORT_ERROR = f"{type(e).__name__}: {e}"
 finally:
     sys.stdout.close()
     sys.stdout = old_stdout
+
+# Chinese display mapping
+ZH_TO_EN = {v: k for k, v in TEAM_ZH.items()}
+TEAMS_ZH = sorted(ZH_TO_EN.keys())
 
 # Verify data files exist
 _required_files = ['matches_1930_2022.csv', 'data/fifa_ranking_2022-10-06.csv']
@@ -457,10 +462,18 @@ def get_teams():
     return sorted(all_teams)
 
 @st.cache_data
+def get_teams_zh():
+    """Return Chinese team names sorted."""
+    en_teams = get_teams()
+    zh_names = [to_zh(t) for t in en_teams]
+    return sorted(zh_names)
+
+@st.cache_data
 def get_groups():
     return load_tournament()['groups']
 
 TEAMS = get_teams()
+TEAMS_ZH_LIST = get_teams_zh()
 GROUPS = get_groups()
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -499,25 +512,27 @@ tab1, tab2, tab3 = st.tabs(["🔮 单场预测", "📊 小组推演", "ℹ️ �
 with tab1:
     col1, col2, col3 = st.columns([2, 1, 2])
     with col1:
-        home_team = st.selectbox(
+        home_team_zh = st.selectbox(
             "🏠 主队",
-            TEAMS,
-            index=TEAMS.index('Mexico') if 'Mexico' in TEAMS else 0,
+            TEAMS_ZH_LIST,
+            index=TEAMS_ZH_LIST.index('墨西哥') if '墨西哥' in TEAMS_ZH_LIST else 0,
             label_visibility="collapsed",
             placeholder="选择主队",
         )
+        home_team = ZH_TO_EN.get(home_team_zh, home_team_zh)
     with col2:
         st.markdown(
             "<div style='text-align:center;padding-top:0.5rem;font-size:1.5rem;color:#52525b;'>vs</div>",
             unsafe_allow_html=True)
     with col3:
-        away_team = st.selectbox(
+        away_team_zh = st.selectbox(
             "✈️ 客队",
-            TEAMS,
-            index=TEAMS.index('South Africa') if 'South Africa' in TEAMS else 1,
+            TEAMS_ZH_LIST,
+            index=TEAMS_ZH_LIST.index('南非') if '南非' in TEAMS_ZH_LIST else 1,
             label_visibility="collapsed",
             placeholder="选择客队",
         )
+        away_team = ZH_TO_EN.get(away_team_zh, away_team_zh)
 
     if st.button("🔮 开始预测", use_container_width=True):
         if home_team == away_team:
@@ -526,6 +541,8 @@ with tab1:
             with st.spinner("AI 正在分析中..."):
                 try:
                     result = predict_match(home_team, away_team, 2026)
+                    home_zh = to_zh(home_team)
+                    away_zh = to_zh(away_team)
                 except Exception as e:
                     st.error(f"预测失败: {type(e).__name__}: {e}")
                     import traceback
@@ -541,8 +558,8 @@ with tab1:
                 max_prob = max(ens.values())
                 winner_emoji = {'home': '🏠', 'away': '✈️', 'draw': '🤝'}
                 winner_label = {
-                    'home': f'{winner_emoji["home"]} {home_team}',
-                    'away': f'{winner_emoji["away"]} {away_team}',
+                    'home': f'{winner_emoji["home"]} {home_zh}',
+                    'away': f'{winner_emoji["away"]} {away_zh}',
                     'draw': '🤝 平局',
                 }
 
@@ -559,9 +576,9 @@ with tab1:
                 # ── Probability Pills ──
                 pill_order = ['home', 'draw', 'away']
                 pill_labels = {
-                    'home': ('🏠', home_team),
+                    'home': ('🏠', home_zh),
                     'draw': ('🤝', '平局'),
-                    'away': ('✈️', away_team),
+                    'away': ('✈️', away_zh),
                 }
                 st.markdown('<div class="prob-pills">', unsafe_allow_html=True)
                 for key in pill_order:
@@ -578,7 +595,7 @@ with tab1:
                 st.markdown('</div>', unsafe_allow_html=True)
 
                 # ── Expected Score ──
-                st.markdown(f"##### ⚽ 期望进球：{home_team} **{exp_home:.2f}** — **{exp_away:.2f}** {away_team}")
+                st.markdown(f"##### ⚽ 期望进球：{home_zh} **{exp_home:.2f}** — **{exp_away:.2f}** {away_zh}")
 
                 # ── Top Scorelines ──
                 for rank, ((h, a), prob) in enumerate(top_scores[:5]):
@@ -586,7 +603,7 @@ with tab1:
                     medal = ['🥇','🥈','🥉','',''][rank]
                     st.markdown(f"""
                     <div class="score-row {cls}">
-                        <span>{medal} {home_team} <span class="score-num">{h}</span> — <span class="score-num">{a}</span> {away_team}</span>
+                        <span>{medal} {home_zh} <span class="score-num">{h}</span> — <span class="score-num">{a}</span> {away_zh}</span>
                         <span class="score-prob">{prob*100:.1f}%</span>
                     </div>
                     """, unsafe_allow_html=True)
@@ -617,7 +634,7 @@ with tab1:
                     &nbsp;&nbsp;|&nbsp;&nbsp;
                     冷门概率 <b>{upset['upset_probability']*100:.0f}%</b>
                     &nbsp;&nbsp;|&nbsp;&nbsp;
-                    热门方 <b>{upset['favorite']}</b>
+                    热门方 <b>{to_zh(upset['favorite'])}</b>
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -644,7 +661,7 @@ with tab2:
             for i, (team, stats) in enumerate(gr['standings'], 1):
                 icon = '✅' if i <= 2 else ('🟡' if i == 3 else '❌')
                 table_data.append({
-                    '': icon, '#': i, '球队': team,
+                    '': icon, '#': i, '球队': to_zh(team),
                     '分': stats['pts'], '进': stats['gf'], '失': stats['ga'], '净': f"{stats['gd']:+d}",
                 })
             st.dataframe(pd.DataFrame(table_data).set_index('#'), use_container_width=True)
@@ -655,7 +672,7 @@ with tab2:
             for m in gr['matches']:
                 w = {'home': '🏠', 'away': '✈️', 'draw': '🤝'}.get(m['winner'], '')
                 st.markdown(
-                    f"**{m['home']}**  {m['score']}  **{m['away']}**  "
+                    f"**{to_zh(m['home'])}**  {m['score']}  **{to_zh(m['away'])}**  "
                     f"({w} 主{m['home_prob']*100:.0f}% 平{m['draw_prob']*100:.0f}% 客{m['away_prob']*100:.0f}%)"
                 )
 
