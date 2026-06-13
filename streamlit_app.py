@@ -622,7 +622,7 @@ with tab1:
                     <div class="bet-item"><div class="bet-value">{over15*100:.0f}%</div><div class="bet-label">大 1.5</div></div>
                     <div class="bet-item"><div class="bet-value">{over25*100:.0f}%</div><div class="bet-label">大 2.5</div></div>
                     <div class="bet-item"><div class="bet-value">{btts*100:.0f}%</div><div class="bet-label">双方进球</div></div>
-                    <div class="bet-item"><div class="bet-value">{exp_home + exp_away:.1f}</div><div class="bet-label">总进球</div></div>
+                    <div class="bet-item"><div class="bet-value">{exp_home + exp_away:.1f}<span style="font-size:0.7rem;"> 球</span></div><div class="bet-label">期望总进球</div></div>
                 </div>
                 """, unsafe_allow_html=True)
 
