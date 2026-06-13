@@ -1,0 +1,62 @@
+{
+  "tournament": "FIFA World Cup 2026",
+  "last_updated": "2026-06-13",
+  "matches": [
+    {
+      "date": "2026-06-11",
+      "group": "A",
+      "home_team": "Mexico",
+      "away_team": "South Africa",
+      "home_score": 2,
+      "away_score": 0,
+      "winner": "home",
+      "predicted_winner": "home",
+      "predicted_exp_goals": [1.92, 0.77],
+      "model_correct": true
+    },
+    {
+      "date": "2026-06-11",
+      "group": "A",
+      "home_team": "Korea Republic",
+      "away_team": "Czech Republic",
+      "home_score": 2,
+      "away_score": 1,
+      "winner": "home",
+      "predicted_winner": "home",
+      "predicted_exp_goals": [1.40, 1.16],
+      "model_correct": true
+    },
+    {
+      "date": "2026-06-12",
+      "group": "B",
+      "home_team": "Canada",
+      "away_team": "Bosnia and Herzegovina",
+      "home_score": 1,
+      "away_score": 1,
+      "winner": "draw",
+      "predicted_winner": "away",
+      "predicted_exp_goals": [0.82, 1.57],
+      "model_correct": false
+    },
+    {
+      "date": "2026-06-13",
+      "group": "D",
+      "home_team": "United States",
+      "away_team": "Paraguay",
+      "home_score": 4,
+      "away_score": 1,
+      "winner": "home",
+      "predicted_winner": "home",
+      "predicted_exp_goals": [0.92, 0.65],
+      "predicted_4_1_probability": 0.0041,
+      "model_correct": true,
+      "note": "美国大胜，但模型预测期望进球仅0.92-0.65，4-1概率仅0.41%。东道主揭幕战爆发力远超历史数据所能捕捉。"
+    }
+  ],
+  "summary": {
+    "total_matches": 4,
+    "model_correct_wdl": 3,
+    "model_accuracy": "75.0%",
+    "avg_expected_goal_error": 0.89
+  }
+}
