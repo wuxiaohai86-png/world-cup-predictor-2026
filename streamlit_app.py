@@ -21,17 +21,34 @@ st.set_page_config(
 )
 
 # ═══════════════════════════════════════════════════════════════════════════
-# IMPORT PREDICTION ENGINE (silently)
+# IMPORT PREDICTION ENGINE (with error handling)
 # ═══════════════════════════════════════════════════════════════════════════
+
+# Fix working directory to script location (needed for Streamlit Cloud)
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+if _SCRIPT_DIR and _SCRIPT_DIR != os.getcwd():
+    os.chdir(_SCRIPT_DIR)
+
+IMPORT_OK = False
+IMPORT_ERROR = None
 
 old_stdout = sys.stdout
 sys.stdout = open(os.devnull, 'w', encoding='utf-8')
-from predict_match import predict_match
-from group_projection import predict_group, load_tournament
-from models import score_probability_matrix, calculate_poisson_lambdas
-from data import load_match_data, calculate_team_stats
-sys.stdout.close()
-sys.stdout = old_stdout
+try:
+    from predict_match import predict_match
+    from group_projection import predict_group, load_tournament
+    from models import score_probability_matrix, calculate_poisson_lambdas
+    from data import load_match_data, calculate_team_stats
+    IMPORT_OK = True
+except Exception as e:
+    IMPORT_ERROR = f"{type(e).__name__}: {e}"
+finally:
+    sys.stdout.close()
+    sys.stdout = old_stdout
+
+# Verify data files exist
+_required_files = ['matches_1930_2022.csv', 'data/fifa_ranking_2022-10-06.csv']
+_missing_files = [f for f in _required_files if not os.path.exists(f)]
 
 # ═══════════════════════════════════════════════════════════════════════════
 # 21ST-INSPIRED DESIGN SYSTEM (CSS)
@@ -450,6 +467,14 @@ GROUPS = get_groups()
 # HERO HEADER
 # ═══════════════════════════════════════════════════════════════════════════
 
+# ── Diagnostic bar (only shown if something is wrong) ──
+if not IMPORT_OK:
+    st.error(f"⚠️ 模型加载失败: {IMPORT_ERROR}")
+    st.stop()
+if _missing_files:
+    st.error(f"⚠️ 数据文件缺失: {_missing_files}")
+    st.stop()
+
 st.markdown("""
 <div class="hero">
     <div class="hero-badge">
@@ -499,7 +524,14 @@ with tab1:
             st.error("不能选同一支球队！")
         else:
             with st.spinner("AI 正在分析中..."):
-                result = predict_match(home_team, away_team, 2026)
+                try:
+                    result = predict_match(home_team, away_team, 2026)
+                except Exception as e:
+                    st.error(f"预测失败: {type(e).__name__}: {e}")
+                    import traceback
+                    with st.expander("🔧 错误详情"):
+                        st.code(traceback.format_exc())
+                    st.stop()
                 winner = result['ensemble_winner']
                 ens = result['ensemble']
                 exp_home, exp_away = result['expected_score']
@@ -598,7 +630,14 @@ with tab2:
 
     if st.button("🔮 推演积分榜", use_container_width=True):
         with st.spinner("正在模拟..."):
-            gr = predict_group(group_name, GROUPS[group_name], silent=True)
+            try:
+                gr = predict_group(group_name, GROUPS[group_name], silent=True)
+            except Exception as e:
+                st.error(f"推演失败: {type(e).__name__}: {e}")
+                import traceback
+                with st.expander("🔧 错误详情"):
+                    st.code(traceback.format_exc())
+                st.stop()
 
             # Standings
             table_data = []
