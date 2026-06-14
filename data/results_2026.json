@@ -1,6 +1,6 @@
 {
   "tournament": "FIFA World Cup 2026",
-  "last_updated": "2026-06-14",
+  "last_updated": "2026-06-15",
   "matches": [
     {
       "date": "2026-06-11",
@@ -103,12 +103,25 @@
       "predicted_exp_goals": [1.07, 1.17],
       "model_correct": false,
       "note": "澳大利亚2-0爆冷击败土耳其！Irankunda(27')+Metcalfe(75')。模型预测土耳其胜(35.7%)。澳大利亚用实用主义足球拿下开门红。"
+    },
+    {
+      "date": "2026-06-15",
+      "group": "E",
+      "home_team": "Germany",
+      "away_team": "Curacao",
+      "home_score": 7,
+      "away_score": 1,
+      "winner": "home",
+      "predicted_winner": "home",
+      "predicted_exp_goals": [2.21, 0.61],
+      "model_correct": true,
+      "note": "德国7-1屠杀库拉索！模型预测德国胜但严重低估进球数(期望2.21实际7球)。库拉索打入历史首球值得铭记。"
     }
   ],
   "summary": {
-    "total_matches": 8,
-    "model_correct_wdl": 4,
-    "model_accuracy": "50.0%",
+    "total_matches": 9,
+    "model_correct_wdl": 5,
+    "model_accuracy": "55.6%",
     "avg_expected_goal_error": 0.89
   }
 }
