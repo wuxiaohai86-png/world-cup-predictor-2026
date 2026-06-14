@@ -63,7 +63,7 @@
       "predicted_winner": "away",
       "predicted_exp_goals": [0.57, 1.48],
       "model_correct": false,
-      "note": "卡塔尔1-1逼平瑞士！模型预测瑞士胜(65.1%)期望1.48球。1-1是Poisson第4可能比分(10.9%)。卡塔尔主场气势加防守反击拿到宝贵1分。"
+      "note": "卡塔尔1-1逼平瑞士！瑞士Miro Muheim补时乌龙球送卡塔尔历史首分。模型预测瑞士胜(65.1%)。"
     },
     {
       "date": "2026-06-14",
@@ -76,13 +76,26 @@
       "predicted_winner": "home",
       "predicted_exp_goals": [1.67, 0.40],
       "model_correct": false,
-      "note": "大冷门！摩洛哥1-1逼平巴西！模型预测巴西胜(80.2%)期望1.67球。摩洛哥继2022年后再次证明自己是巨人杀手。巴西仅进1球远低于预期的1.67。"
+      "note": "大冷门！摩洛哥1-1逼平巴西！模型预测巴西胜(80.2%)。Vinicius Jr世界波扳平。摩洛哥继2022年后再次证明巨人杀手本色。"
+    },
+    {
+      "date": "2026-06-14",
+      "group": "C",
+      "home_team": "Haiti",
+      "away_team": "Scotland",
+      "home_score": 0,
+      "away_score": 1,
+      "winner": "away",
+      "predicted_winner": "away",
+      "predicted_exp_goals": [1.03, 2.47],
+      "model_correct": true,
+      "note": "苏格兰1-0小胜海地！John McGinn打入制胜球。苏格兰自1990年以来首场世界杯胜利。模型预测苏格兰胜，期望2.47球但实际仅进1球。"
     }
   ],
   "summary": {
-    "total_matches": 6,
-    "model_correct_wdl": 3,
-    "model_accuracy": "50.0%",
+    "total_matches": 7,
+    "model_correct_wdl": 4,
+    "model_accuracy": "57.1%",
     "avg_expected_goal_error": 0.89
   }
 }
