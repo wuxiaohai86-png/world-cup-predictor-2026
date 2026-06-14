@@ -90,12 +90,25 @@
       "predicted_exp_goals": [1.03, 2.47],
       "model_correct": true,
       "note": "苏格兰1-0小胜海地！John McGinn打入制胜球。苏格兰自1990年以来首场世界杯胜利。模型预测苏格兰胜，期望2.47球但实际仅进1球。"
+    },
+    {
+      "date": "2026-06-14",
+      "group": "D",
+      "home_team": "Australia",
+      "away_team": "Turkey",
+      "home_score": 2,
+      "away_score": 0,
+      "winner": "home",
+      "predicted_winner": "away",
+      "predicted_exp_goals": [1.07, 1.17],
+      "model_correct": false,
+      "note": "澳大利亚2-0爆冷击败土耳其！Irankunda(27')+Metcalfe(75')。模型预测土耳其胜(35.7%)。澳大利亚用实用主义足球拿下开门红。"
     }
   ],
   "summary": {
-    "total_matches": 7,
+    "total_matches": 8,
     "model_correct_wdl": 4,
-    "model_accuracy": "57.1%",
+    "model_accuracy": "50.0%",
     "avg_expected_goal_error": 0.89
   }
 }
