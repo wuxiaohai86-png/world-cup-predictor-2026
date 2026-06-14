@@ -1,6 +1,6 @@
 {
   "tournament": "FIFA World Cup 2026",
-  "last_updated": "2026-06-13",
+  "last_updated": "2026-06-14",
   "matches": [
     {
       "date": "2026-06-11",
@@ -64,12 +64,25 @@
       "predicted_exp_goals": [0.57, 1.48],
       "model_correct": false,
       "note": "卡塔尔1-1逼平瑞士！模型预测瑞士胜(65.1%)期望1.48球。1-1是Poisson第4可能比分(10.9%)。卡塔尔主场气势加防守反击拿到宝贵1分。"
+    },
+    {
+      "date": "2026-06-14",
+      "group": "C",
+      "home_team": "Brazil",
+      "away_team": "Morocco",
+      "home_score": 1,
+      "away_score": 1,
+      "winner": "draw",
+      "predicted_winner": "home",
+      "predicted_exp_goals": [1.67, 0.40],
+      "model_correct": false,
+      "note": "大冷门！摩洛哥1-1逼平巴西！模型预测巴西胜(80.2%)期望1.67球。摩洛哥继2022年后再次证明自己是巨人杀手。巴西仅进1球远低于预期的1.67。"
     }
   ],
   "summary": {
-    "total_matches": 5,
+    "total_matches": 6,
     "model_correct_wdl": 3,
-    "model_accuracy": "60.0%",
+    "model_accuracy": "50.0%",
     "avg_expected_goal_error": 0.89
   }
 }
