@@ -155,12 +155,25 @@
       "predicted_exp_goals": [1.76, 0.46],
       "model_correct": true,
       "note": "瑞典5-1大胜突尼斯！模型预测瑞典胜(58.5%)。攻击线爆发远超预期(期望1.76实际5球)。"
+    },
+    {
+      "date": "2026-06-16",
+      "group": "H",
+      "home_team": "Spain",
+      "away_team": "Cape Verde",
+      "home_score": 0,
+      "away_score": 0,
+      "winner": "draw",
+      "predicted_winner": "home",
+      "predicted_exp_goals": [1.88, 0.66],
+      "model_correct": false,
+      "note": "西班牙0-0被佛得角逼平！模型预测西班牙胜(62.2%)。佛得角世界杯首秀即零封西班牙！继库拉索后第二个首秀爆冷的岛国新军。"
     }
   ],
   "summary": {
-    "total_matches": 12,
+    "total_matches": 13,
     "model_correct_wdl": 7,
-    "model_accuracy": "58.3%",
+    "model_accuracy": "53.8%",
     "avg_expected_goal_error": 0.89
   }
 }
