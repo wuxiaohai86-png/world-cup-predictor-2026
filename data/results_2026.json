@@ -142,12 +142,25 @@
       "predicted_exp_goals": [1.18, 0.72],
       "model_correct": true,
       "note": "科特迪瓦1-0小胜厄瓜多尔。模型预测科特迪瓦胜，期望1.18球，实际刚好1-0。精准命中！"
+    },
+    {
+      "date": "2026-06-15",
+      "group": "F",
+      "home_team": "Sweden",
+      "away_team": "Tunisia",
+      "home_score": 5,
+      "away_score": 1,
+      "winner": "home",
+      "predicted_winner": "home",
+      "predicted_exp_goals": [1.76, 0.46],
+      "model_correct": true,
+      "note": "瑞典5-1大胜突尼斯！模型预测瑞典胜(58.5%)。攻击线爆发远超预期(期望1.76实际5球)。"
     }
   ],
   "summary": {
-    "total_matches": 11,
-    "model_correct_wdl": 6,
-    "model_accuracy": "54.5%",
+    "total_matches": 12,
+    "model_correct_wdl": 7,
+    "model_accuracy": "58.3%",
     "avg_expected_goal_error": 0.89
   }
 }
