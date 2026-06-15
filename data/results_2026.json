@@ -168,12 +168,25 @@
       "predicted_exp_goals": [1.88, 0.66],
       "model_correct": false,
       "note": "西班牙0-0被佛得角逼平！模型预测西班牙胜(62.2%)。佛得角世界杯首秀即零封西班牙！继库拉索后第二个首秀爆冷的岛国新军。"
+    },
+    {
+      "date": "2026-06-16",
+      "group": "G",
+      "home_team": "Belgium",
+      "away_team": "Egypt",
+      "home_score": 1,
+      "away_score": 1,
+      "winner": "draw",
+      "predicted_winner": "home",
+      "predicted_exp_goals": [2.22, 0.31],
+      "model_correct": false,
+      "note": "比利时1-1被埃及逼平！模型预测比利时胜(70.6%)。Salah带队逼平欧洲红魔。本届欧洲强队连续翻车。"
     }
   ],
   "summary": {
-    "total_matches": 13,
+    "total_matches": 14,
     "model_correct_wdl": 7,
-    "model_accuracy": "53.8%",
+    "model_accuracy": "50.0%",
     "avg_expected_goal_error": 0.89
   }
 }
