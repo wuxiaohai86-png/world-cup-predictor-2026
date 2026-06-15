@@ -135,19 +135,19 @@
       "group": "E",
       "home_team": "Cote d'Ivoire",
       "away_team": "Ecuador",
-      "home_score": 0,
+      "home_score": 1,
       "away_score": 0,
-      "winner": "draw",
+      "winner": "home",
       "predicted_winner": "home",
       "predicted_exp_goals": [1.18, 0.72],
-      "model_correct": false,
-      "note": "科特迪瓦0-0闷平厄瓜多尔。模型预测科特迪瓦胜但两队均无建树。平淡开局，各取1分。"
+      "model_correct": true,
+      "note": "科特迪瓦1-0小胜厄瓜多尔。模型预测科特迪瓦胜，期望1.18球，实际刚好1-0。精准命中！"
     }
   ],
   "summary": {
     "total_matches": 11,
-    "model_correct_wdl": 5,
-    "model_accuracy": "45.5%",
+    "model_correct_wdl": 6,
+    "model_accuracy": "54.5%",
     "avg_expected_goal_error": 0.89
   }
 }
