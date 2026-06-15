@@ -79,34 +79,32 @@ POISSON_LAMBDA_FLOOR_AWAY: float = 0.10
 POISSON_STRENGTH_FLOOR: float = 0.30
 
 # Host advantage multiplier in Poisson expected goals.
-# 1.20 = host gets 20% more expected goals than neutral.
-POISSON_HOST_FACTOR: float = 1.20
-POISSON_NEUTRAL_FACTOR: float = 1.05
+# v2: Neutral venue uses symmetric league average (no artificial home/away split).
+# Only actual host nations get a boost.
+POISSON_HOST_FACTOR: float = 1.15
+POISSON_NEUTRAL_FACTOR: float = 1.00
 
 # ═══════════════════════════════════════════════════════════════════════════
 # ENSEMBLE WEIGHTS
 # ═══════════════════════════════════════════════════════════════════════════
 
-# Poisson dominates ensemble because it models score-level interactions
-# and is less susceptible to over-learning the ~27% historical draw rate.
-# Raised to 70% because Poisson expected goals have been more accurate
-# than classification models in back-testing.
-ENSEMBLE_POISSON_WEIGHT: float = 0.70
-ENSEMBLE_RF_WEIGHT: float = 0.12
-ENSEMBLE_LR_WEIGHT: float = 0.18
+# Poisson dominates ensemble. v2: increased to 80% — Dixon-Coles correction
+# makes Poisson draw estimates more reliable. RF/LR over-learn historical bias.
+ENSEMBLE_POISSON_WEIGHT: float = 0.80
+ENSEMBLE_RF_WEIGHT: float = 0.08
+ENSEMBLE_LR_WEIGHT: float = 0.12
 
 # ═══════════════════════════════════════════════════════════════════════════
 # STRENGTH DISPARITY / DRAW SUPPRESSION
 # ═══════════════════════════════════════════════════════════════════════════
 
 # Minimum strength gap (0-1) before draw suppression activates.
-# Below this threshold, teams are considered evenly matched.
-# Raised to reduce false positives from historical data biases.
-DRAW_SUPPRESSION_THRESHOLD: float = 0.40
+# v2: Raised further — only trigger for truly lopsided matchups.
+DRAW_SUPPRESSION_THRESHOLD: float = 0.45
 
-# Fraction of draw probability to suppress, proportional to strength gap.
-# Reduced to avoid over-suppressing draws in competitive matches.
-DRAW_SUPPRESSION_FACTOR: float = 0.35
+# Fraction of draw probability to suppress.
+# v2: Reduced further — fewer false-positive draw suppressions.
+DRAW_SUPPRESSION_FACTOR: float = 0.25
 
 # How suppressed draw probability is redistributed between stronger/weaker.
 STRONGER_REDISTRIBUTION: float = 0.65

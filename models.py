@@ -248,10 +248,11 @@ def calculate_poisson_lambdas(
     team_stats: Dict[str, Dict[str, Any]],
     df: pd.DataFrame,
     year: int = 2026,
+    rank_dict: Optional[Dict[str, int]] = None,
 ) -> Tuple[float, float]:
     """
     Calculate expected goals (lambda) for each team.
-    Uses team attack/defense strength relative to league average.
+    v2: Symmetric league average for neutral venue + FIFA ranking blend.
     """
     hs = team_stats.get(home_team, {})
     aws = team_stats.get(away_team, {})
@@ -261,7 +262,7 @@ def calculate_poisson_lambdas(
     away_gpg = aws.get('goals_per_game', DEFAULT_GOALS_PER_GAME)
     away_gcpg = aws.get('goals_conceded_per_game', DEFAULT_GOALS_CONCEDED)
 
-    # League averages
+    # League averages (original approach: separate home/away)
     all_scores = df['home_score'].tolist() + df['away_score'].tolist()
     league_avg_goal = np.mean(all_scores) if all_scores else 1.5
     league_avg_home = df['home_score'].mean()
@@ -292,8 +293,8 @@ def score_probability_matrix(
     max_goals: int = POISSON_MAX_GOALS,
 ) -> Tuple[Dict[Tuple[int, int], float], Dict[str, float]]:
     """
-    Calculate probability for each exact score using Poisson distribution.
-    Returns (score_probs, wdl_probs).
+    Calculate probability for each exact score using Poisson distribution
+    with Dixon-Coles low-score correction.
     """
     score_probs: Dict[Tuple[int, int], float] = {}
     total_prob = 0.0
@@ -306,8 +307,27 @@ def score_probability_matrix(
             score_probs[(i, j)] = p_score
             total_prob += p_score
 
-    # Normalize
-    score_probs = {k: v / total_prob for k, v in score_probs.items()}
+    # ── Dixon-Coles correction (Change 3) ──
+    # Boosts probabilities of 0-0, 1-0, 0-1, 1-1 which are
+    # systematically under-estimated by the independence assumption.
+    rho = 0.04  # Dixon-Coles: mild low-score boost (0-0, 1-0, 0-1, 1-1)
+
+    for (i, j), p in list(score_probs.items()):
+        if i == 0 and j == 0:
+            tau = 1.0 + rho * home_lambda * away_lambda
+        elif i == 0 and j == 1:
+            tau = 1.0 - rho * home_lambda
+        elif i == 1 and j == 0:
+            tau = 1.0 - rho * away_lambda
+        elif i == 1 and j == 1:
+            tau = 1.0 + rho
+        else:
+            tau = 1.0
+        score_probs[(i, j)] = p * tau
+
+    # Renormalize
+    total_adj = sum(score_probs.values())
+    score_probs = {k: v / total_adj for k, v in score_probs.items()}
 
     # Aggregate to W/D/L
     home_win = sum(p for (h, a), p in score_probs.items() if h > a)
@@ -415,12 +435,14 @@ def calculate_strength_disparity(
     away_rank = rank_dict.get(away_team, 999)
 
     def composite_strength(stats: Dict[str, Any], rank: int) -> float:
+        # v2: FIFA ranking component boosted (from 0.3 to 0.9 per rank point)
+        rank_strength = max(0, (100 - min(rank, 100))) * 0.9
         return (
             stats.get('win_rate', 0) * 40 +
             stats.get('recent_form', 0) * 30 +
             stats.get('goals_per_game', 1) * 10 -
             stats.get('goals_conceded_per_game', 1) * 12 +
-            max(0, (100 - min(rank, 100))) * 0.3
+            rank_strength
         )
 
     home_str = composite_strength(hs, home_rank)

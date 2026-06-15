@@ -611,7 +611,10 @@ with tab1:
                 # ── Betting Grid ──
                 _df = load_match_data()
                 _ts = calculate_team_stats(_df, 2022)
-                hl, al = calculate_poisson_lambdas(home_team, away_team, _ts, _df, 2026)
+                _rk, _ = load_match_data(), {}  # get rankings
+                from data import load_fifa_rankings
+                _rk, _ = load_fifa_rankings()
+                hl, al = calculate_poisson_lambdas(home_team, away_team, _ts, _df, 2026, _rk)
                 sp, _ = score_probability_matrix(hl, al)
                 over25 = sum(p for (h, a), p in sp.items() if h + a > 2.5)
                 over15 = sum(p for (h, a), p in sp.items() if h + a > 1.5)

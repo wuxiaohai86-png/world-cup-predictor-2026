@@ -77,7 +77,7 @@ def predict_match(
 
     # ── Poisson score prediction ──
     home_lambda, away_lambda = calculate_poisson_lambdas(
-        home_team, away_team, team_stats, df, year)
+        home_team, away_team, team_stats, df, year, rank_dict)
     score_probs, poisson_wdl = score_probability_matrix(home_lambda, away_lambda)
     top_scores = get_top_scorelines(score_probs, n=12)
     exp_home, exp_away = expected_score_from_matrix(score_probs)
@@ -87,7 +87,8 @@ def predict_match(
         rf_probs, lr_probs, poisson_wdl,
         home_team, away_team, year, team_stats, rank_dict)
     meta = ensemble.pop('_meta', {})
-    ensemble_winner = max(ensemble, key=ensemble.get)
+    # ── Winner: pure Poisson (Dixon-Coles corrected) ──
+    ensemble_winner = max(poisson_wdl, key=poisson_wdl.get)
 
     # ── Upset metrics ──
     upset = calculate_upset_metrics(
@@ -148,15 +149,11 @@ def predict_match(
         print(f'    >>> Predicted: {label_map[winner]}')
         print()
 
-    # Ensemble
-    print(f'  {"WEIGHTED ENSEMBLE (Poisson 70% + RF 12% + LR 18%)":<66}')
+    # Final prediction (pure Poisson + Dixon-Coles for winner)
+    print(f'  {"FINAL PREDICTION (Pure Poisson + Dixon-Coles)":<66}')
     for outcome in ['home', 'draw', 'away']:
-        p = ensemble[outcome]
+        p = poisson_wdl.get(outcome, 0)
         print(f'    {label_map[outcome]:<22} {p*100:>5.1f}%  {prob_bar(p)}')
-
-    if meta.get('draw_suppressed'):
-        gap_pct = meta['strength_gap'] * 100
-        print(f'    [Draw suppressed due to {gap_pct:.0f}% strength gap]')
     if meta.get('host_boosted') and meta['host_boost_amount'] > 0:
         print(f'    [Host boost +{meta["host_boost_amount"]*100:.0f}pp applied]')
     print(f'    >>> Final Prediction: {label_map[ensemble_winner]}')
