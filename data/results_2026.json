@@ -194,12 +194,25 @@
       "predicted_exp_goals": [0.44, 1.79],
       "model_correct": false,
       "note": "沙特1-1逼平乌拉圭！模型预测乌拉圭胜。亚洲球队本届世界杯继续保持顽强表现。"
+    },
+    {
+      "date": "2026-06-16",
+      "group": "G",
+      "home_team": "Iran",
+      "away_team": "New Zealand",
+      "home_score": 2,
+      "away_score": 2,
+      "winner": "draw",
+      "predicted_winner": "home",
+      "predicted_exp_goals": [1.42, 0.42],
+      "model_correct": false,
+      "note": "伊朗2-2战平新西兰！Elijah Just梅开二度，伊朗两度落后两度扳平。亚洲球队至今保持不败！"
     }
   ],
   "summary": {
-    "total_matches": 15,
+    "total_matches": 16,
     "model_correct_wdl": 7,
-    "model_accuracy": "46.7%",
+    "model_accuracy": "43.8%",
     "avg_expected_goal_error": 0.89
   }
 }
