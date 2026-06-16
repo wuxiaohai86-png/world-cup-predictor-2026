@@ -207,12 +207,38 @@
       "predicted_exp_goals": [1.42, 0.42],
       "model_correct": false,
       "note": "伊朗2-2战平新西兰！Elijah Just梅开二度，伊朗两度落后两度扳平。亚洲球队至今保持不败！"
+    },
+    {
+      "date": "2026-06-17",
+      "group": "I",
+      "home_team": "France",
+      "away_team": "Senegal",
+      "home_score": 3,
+      "away_score": 1,
+      "winner": "home",
+      "predicted_winner": "home",
+      "predicted_exp_goals": [2.44, 0.62],
+      "model_correct": true,
+      "note": "法国3-1胜塞内加尔！Mbappe梅开二度(66',90+6')，Barcola破门。模型预测法国胜，期望2.44球近实际3球。法国成为少数未翻车的欧洲强队。"
+    },
+    {
+      "date": "2026-06-17",
+      "group": "I",
+      "home_team": "Iraq",
+      "away_team": "Norway",
+      "home_score": 0,
+      "away_score": 0,
+      "winner": "draw",
+      "predicted_winner": "draw",
+      "predicted_exp_goals": [0.34, 0.63],
+      "model_correct": true,
+      "note": "伊拉克0-0逼平挪威！Haaland+Odegaard被零封。模型精准预测平局！亚洲球队本届世界杯继续保持不败。"
     }
   ],
   "summary": {
-    "total_matches": 16,
-    "model_correct_wdl": 7,
-    "model_accuracy": "43.8%",
+    "total_matches": 18,
+    "model_correct_wdl": 9,
+    "model_accuracy": "50.0%",
     "avg_expected_goal_error": 0.89
   }
 }
