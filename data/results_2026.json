@@ -181,12 +181,25 @@
       "predicted_exp_goals": [2.22, 0.31],
       "model_correct": false,
       "note": "比利时1-1被埃及逼平！模型预测比利时胜(70.6%)。Salah带队逼平欧洲红魔。本届欧洲强队连续翻车。"
+    },
+    {
+      "date": "2026-06-16",
+      "group": "H",
+      "home_team": "Saudi Arabia",
+      "away_team": "Uruguay",
+      "home_score": 0,
+      "away_score": 0,
+      "winner": "draw",
+      "predicted_winner": "away",
+      "predicted_exp_goals": [0.44, 1.79],
+      "model_correct": false,
+      "note": "沙特0-0闷平乌拉圭！模型预测乌拉圭胜。沙特防守顽强，本届世界杯平局率远超历史水平。"
     }
   ],
   "summary": {
-    "total_matches": 14,
+    "total_matches": 15,
     "model_correct_wdl": 7,
-    "model_accuracy": "50.0%",
+    "model_accuracy": "46.7%",
     "avg_expected_goal_error": 0.89
   }
 }
