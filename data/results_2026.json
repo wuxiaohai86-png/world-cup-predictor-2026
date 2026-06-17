@@ -292,6 +292,7 @@
     "total_matches": 20,
     "model_correct_wdl": 10,
     "model_accuracy": "50.0%",
+    "last_updated": "2026-06-17"
     "avg_expected_goal_error": 0.89
   }
 }
