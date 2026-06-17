@@ -279,18 +279,31 @@
       "home_team": "Portugal",
       "away_team": "DR Congo",
       "home_score": 1,
-      "away_score": 0,
-      "winner": "home",
+      "away_score": 1,
+      "winner": "draw",
       "predicted_winner": "home",
       "predicted_exp_goals": [1.84, 0.75],
+      "model_correct": false,
+      "note": "葡萄牙1-1被刚果逼平！Joao Neves破门但刚果Wissa头球扳平。刚果世界杯历史首分+首球。CR7纪录第6届。"
+    },
+    {
+      "date": "2026-06-18",
+      "group": "L",
+      "home_team": "England",
+      "away_team": "Croatia",
+      "home_score": 3,
+      "away_score": 2,
+      "winner": "home",
+      "predicted_winner": "home",
+      "predicted_exp_goals": [1.62, 0.71],
       "model_correct": true,
-      "note": "葡萄牙1-0小胜刚果！Joao Neves头球制胜。CR7第6届世界杯首战告捷。模型预测葡萄牙胜命中。"
+      "note": "英格兰3-2加时逆转克罗地亚！Kane帽子戏法(12'点球+42'+118'点球)，Baturina世界波+Musa补时扳平。本届最精彩比赛！"
     }
   ],
   "summary": {
-    "total_matches": 21,
+    "total_matches": 22,
     "model_correct_wdl": 11,
-    "model_accuracy": "52.4%",
+    "model_accuracy": "50.0%",
     "last_updated": "2026-06-18",
     "avg_expected_goal_error": 0.89
   }
