@@ -291,13 +291,13 @@
       "group": "L",
       "home_team": "England",
       "away_team": "Croatia",
-      "home_score": 3,
+      "home_score": 4,
       "away_score": 2,
       "winner": "home",
       "predicted_winner": "home",
       "predicted_exp_goals": [1.62, 0.71],
       "model_correct": true,
-      "note": "英格兰3-2加时逆转克罗地亚！Kane帽子戏法(12'点球+42'+118'点球)，Baturina世界波+Musa补时扳平。本届最精彩比赛！"
+      "note": "英格兰4-2胜克罗地亚！Kane帽子戏法。本届进球大战之一。模型预测英格兰胜命中。"
     }
   ],
   "summary": {
