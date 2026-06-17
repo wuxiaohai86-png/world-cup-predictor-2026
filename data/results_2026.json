@@ -258,21 +258,7 @@
       "predicted_winner": "home",
       "predicted_exp_goals": [1.17, 0.84],
       "model_correct": true,
-      "note": "奥地利3-1胜约旦！约旦世界杯首秀取得进球值得铭记。"
-    }
-    },
-    {
-      "date": "2026-06-17",
-      "group": "J",
-      "home_team": "Argentina",
-      "away_team": "Algeria",
-      "home_score": 3,
-      "away_score": 1,
-      "winner": "home",
-      "predicted_winner": "home",
-      "predicted_exp_goals": [2.13, 0.60],
-      "model_correct": true,
-      "note": "阿根廷3-0阿尔及利亚！Messi帽子戏法。卫冕冠军强势开局，模型精准预测阿根廷胜。"
+      "note": "阿根廷3-1胜阿尔及利亚！模型预测阿根廷胜命中。"
     },
     {
       "date": "2026-06-17",
@@ -286,13 +272,26 @@
       "predicted_exp_goals": [1.17, 0.84],
       "model_correct": true,
       "note": "奥地利3-1胜约旦！Schmid+乌龙+Arnautovic点球破门。约旦世界杯首秀取得进球值得铭记。"
+    },
+    {
+      "date": "2026-06-18",
+      "group": "K",
+      "home_team": "Portugal",
+      "away_team": "DR Congo",
+      "home_score": 1,
+      "away_score": 0,
+      "winner": "home",
+      "predicted_winner": "home",
+      "predicted_exp_goals": [1.84, 0.75],
+      "model_correct": true,
+      "note": "葡萄牙1-0小胜刚果！Joao Neves头球制胜。CR7第6届世界杯首战告捷。模型预测葡萄牙胜命中。"
     }
   ],
   "summary": {
-    "total_matches": 20,
-    "model_correct_wdl": 10,
-    "model_accuracy": "50.0%",
-    "last_updated": "2026-06-17"
+    "total_matches": 21,
+    "model_correct_wdl": 11,
+    "model_accuracy": "52.4%",
+    "last_updated": "2026-06-18",
     "avg_expected_goal_error": 0.89
   }
 }
