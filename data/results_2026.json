@@ -227,18 +227,71 @@
       "home_team": "Iraq",
       "away_team": "Norway",
       "home_score": 1,
-      "away_score": 4,
+      "away_score": 3,
       "winner": "away",
       "predicted_winner": "draw",
       "predicted_exp_goals": [0.34, 0.63],
       "model_correct": false,
-      "note": "挪威4-1大胜伊拉克！Haaland帽子戏法。亚洲球队首败。模型严重低估挪威攻击力(期望0.63实际4球)。"
+      "note": "挪威3-1胜伊拉克。Haaland破门。亚洲球队首败。模型预测平局未中，低估挪威攻击力。"
+    },
+    {
+      "date": "2026-06-17",
+      "group": "J",
+      "home_team": "Argentina",
+      "away_team": "Algeria",
+      "home_score": 3,
+      "away_score": 1,
+      "winner": "home",
+      "predicted_winner": "home",
+      "predicted_exp_goals": [2.13, 0.60],
+      "model_correct": true,
+      "note": "阿根廷3-1胜阿尔及利亚！Messi破门。卫冕冠军强势开局，模型预测阿根廷胜命中。"
+    },
+    {
+      "date": "2026-06-17",
+      "group": "J",
+      "home_team": "Austria",
+      "away_team": "Jordan",
+      "home_score": 3,
+      "away_score": 1,
+      "winner": "home",
+      "predicted_winner": "home",
+      "predicted_exp_goals": [1.17, 0.84],
+      "model_correct": true,
+      "note": "奥地利3-1胜约旦！约旦世界杯首秀取得进球值得铭记。"
+    }
+    },
+    {
+      "date": "2026-06-17",
+      "group": "J",
+      "home_team": "Argentina",
+      "away_team": "Algeria",
+      "home_score": 3,
+      "away_score": 1,
+      "winner": "home",
+      "predicted_winner": "home",
+      "predicted_exp_goals": [2.13, 0.60],
+      "model_correct": true,
+      "note": "阿根廷3-0阿尔及利亚！Messi帽子戏法。卫冕冠军强势开局，模型精准预测阿根廷胜。"
+    },
+    {
+      "date": "2026-06-17",
+      "group": "J",
+      "home_team": "Austria",
+      "away_team": "Jordan",
+      "home_score": 3,
+      "away_score": 1,
+      "winner": "home",
+      "predicted_winner": "home",
+      "predicted_exp_goals": [1.17, 0.84],
+      "model_correct": true,
+      "note": "奥地利3-1胜约旦！Schmid+乌龙+Arnautovic点球破门。约旦世界杯首秀取得进球值得铭记。"
     }
   ],
   "summary": {
-    "total_matches": 18,
-    "model_correct_wdl": 8,
-    "model_accuracy": "44.4%",
+    "total_matches": 20,
+    "model_correct_wdl": 10,
+    "model_accuracy": "50.0%",
     "avg_expected_goal_error": 0.89
   }
 }
