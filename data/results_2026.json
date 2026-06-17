@@ -226,19 +226,19 @@
       "group": "I",
       "home_team": "Iraq",
       "away_team": "Norway",
-      "home_score": 0,
-      "away_score": 0,
-      "winner": "draw",
+      "home_score": 1,
+      "away_score": 4,
+      "winner": "away",
       "predicted_winner": "draw",
       "predicted_exp_goals": [0.34, 0.63],
-      "model_correct": true,
-      "note": "伊拉克0-0逼平挪威！Haaland+Odegaard被零封。模型精准预测平局！亚洲球队本届世界杯继续保持不败。"
+      "model_correct": false,
+      "note": "挪威4-1大胜伊拉克！Haaland帽子戏法。亚洲球队首败。模型严重低估挪威攻击力(期望0.63实际4球)。"
     }
   ],
   "summary": {
     "total_matches": 18,
-    "model_correct_wdl": 9,
-    "model_accuracy": "50.0%",
+    "model_correct_wdl": 8,
+    "model_accuracy": "44.4%",
     "avg_expected_goal_error": 0.89
   }
 }
