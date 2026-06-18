@@ -298,12 +298,38 @@
       "predicted_exp_goals": [1.62, 0.71],
       "model_correct": true,
       "note": "英格兰4-2胜克罗地亚！Kane帽子戏法。本届进球大战之一。模型预测英格兰胜命中。"
+    },
+    {
+      "date": "2026-06-18",
+      "group": "L",
+      "home_team": "Ghana",
+      "away_team": "Panama",
+      "home_score": 1,
+      "away_score": 0,
+      "winner": "home",
+      "predicted_winner": "home",
+      "predicted_exp_goals": [4.04, 0.58],
+      "model_correct": true,
+      "note": "加纳1-0小胜巴拿马！模型预测加纳胜，但严重高估进球(期望4.04实际1球)。巴拿马防守顽强。"
+    },
+    {
+      "date": "2026-06-18",
+      "group": "K",
+      "home_team": "Uzbekistan",
+      "away_team": "Colombia",
+      "home_score": 1,
+      "away_score": 3,
+      "winner": "away",
+      "predicted_winner": "away",
+      "predicted_exp_goals": [1.00, 1.04],
+      "model_correct": true,
+      "note": "哥伦比亚3-1胜乌兹别克斯坦！乌兹别克世界杯首秀取得进球。模型预测哥伦比亚胜命中。"
     }
   ],
   "summary": {
-    "total_matches": 22,
-    "model_correct_wdl": 11,
-    "model_accuracy": "50.0%",
+    "total_matches": 24,
+    "model_correct_wdl": 13,
+    "model_accuracy": "54.2%",
     "last_updated": "2026-06-18",
     "avg_expected_goal_error": 0.89
   }
