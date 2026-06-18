@@ -324,12 +324,25 @@
       "predicted_exp_goals": [1.00, 1.04],
       "model_correct": true,
       "note": "哥伦比亚3-1胜乌兹别克斯坦！乌兹别克世界杯首秀取得进球。模型预测哥伦比亚胜命中。"
+    },
+    {
+      "date": "2026-06-19",
+      "group": "A",
+      "home_team": "Czech Republic",
+      "away_team": "South Africa",
+      "home_score": 1,
+      "away_score": 1,
+      "winner": "draw",
+      "predicted_winner": "home",
+      "predicted_exp_goals": [2.03, 0.84],
+      "model_correct": false,
+      "note": "捷克1-1战平南非！Bleacher Report确认。模型预测捷克胜未中。南非两轮拿到第1分。"
     }
   ],
   "summary": {
-    "total_matches": 24,
+    "total_matches": 25,
     "model_correct_wdl": 13,
-    "model_accuracy": "54.2%",
+    "model_accuracy": "52.0%",
     "last_updated": "2026-06-18",
     "avg_expected_goal_error": 0.89
   }
