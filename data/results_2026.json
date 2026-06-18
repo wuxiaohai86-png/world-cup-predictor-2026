@@ -337,12 +337,25 @@
       "predicted_exp_goals": [2.03, 0.84],
       "model_correct": false,
       "note": "捷克1-1战平南非！Bleacher Report确认。模型预测捷克胜未中。南非两轮拿到第1分。"
+    },
+    {
+      "date": "2026-06-19",
+      "group": "B",
+      "home_team": "Switzerland",
+      "away_team": "Bosnia and Herzegovina",
+      "home_score": 4,
+      "away_score": 1,
+      "winner": "home",
+      "predicted_winner": "home",
+      "predicted_exp_goals": [1.44, 1.01],
+      "model_correct": true,
+      "note": "瑞士4-1大胜波黑！模型预测瑞士胜，但低估进球(期望1.44实际4球)。瑞士强势登顶B组。"
     }
   ],
   "summary": {
-    "total_matches": 25,
-    "model_correct_wdl": 13,
-    "model_accuracy": "52.0%",
+    "total_matches": 26,
+    "model_correct_wdl": 14,
+    "model_accuracy": "53.8%",
     "last_updated": "2026-06-18",
     "avg_expected_goal_error": 0.89
   }
